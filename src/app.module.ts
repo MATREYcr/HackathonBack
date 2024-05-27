@@ -1,9 +1,11 @@
+// src/app.module.ts
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MentorModule } from './mentor/mentor.module';
 import { HeroModule } from './hero/hero.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { OpenaiModule } from './openai/openai.module';
 import { CohereAiModule } from './cohere-ai/cohere-ai.module';
@@ -11,16 +13,26 @@ import { QuizQuestionsModule } from './quiz-questions/quiz-questions.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '1234567',
-      database: 'hackathonback',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true //para q se active la creacion de las tablas 
-    }), MentorModule, HeroModule, AuthModule, OpenaiModule, CohereAiModule, QuizQuestionsModule],
+      synchronize: true,
+    }),
+    AuthModule, 
+    OpenaiModule, 
+    CohereAiModule, 
+    QuizQuestionsModule,
+    MentorModule,
+    HeroModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
