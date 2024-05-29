@@ -1,3 +1,4 @@
+import { IsInt } from 'class-validator';
 import { Mentor } from 'src/mentor/entities/mentor.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
@@ -21,6 +22,12 @@ export class Hero {
   @Column({ nullable: true })
   image?: string;
 
+  @Column('int')
+  @IsInt()
+  crowns?: number;
+
   @ManyToOne(() => Mentor, (mentor) => mentor.heroes, { nullable: false, onDelete: 'CASCADE' })
   mentor: Mentor;
+
+
 }

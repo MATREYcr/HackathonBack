@@ -10,6 +10,8 @@ import { AuthModule } from './auth/auth.module';
 import { OpenaiModule } from './openai/openai.module';
 import { CohereAiModule } from './cohere-ai/cohere-ai.module';
 import { QuizQuestionsModule } from './quiz-questions/quiz-questions.module';
+import { LogsTransactionModule } from './logs/logs-transaction/logs-transaction.module';
+import { LogsQuizQuestionsModule } from './logs/logs-quiz-questions/logs-quiz-questions.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { QuizQuestionsModule } from './quiz-questions/quiz-questions.module';
     QuizQuestionsModule,
     MentorModule,
     HeroModule,
+    LogsTransactionModule,
+    LogsQuizQuestionsModule
   ],
   controllers: [AppController],
   providers: [AppService],

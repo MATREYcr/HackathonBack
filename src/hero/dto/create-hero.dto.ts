@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsOptional, MinLength, MaxLength, IsNumber } from 'class-validator';
+import { IsString, IsEmail, IsOptional, MinLength, MaxLength, IsNumber, IsInt } from 'class-validator';
 
 export class CreateHeroDto {
   @IsString()
@@ -19,6 +19,9 @@ export class CreateHeroDto {
   @IsOptional()
   @IsString()
   image?: string;
+
+  @IsInt()
+  crowns?: number;
 
   @IsNumber()
   mentorId: number;
