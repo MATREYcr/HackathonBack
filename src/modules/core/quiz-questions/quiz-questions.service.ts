@@ -51,6 +51,14 @@ export class QuizQuestionsService {
     }
   }
 
+  async findOneBySignature(signature: string): Promise<QuizQuestion> {
+    const questions = await this.quizQuestionsRepository.find({ where: { signature } });
+    const randomIndex = Math.floor(Math.random() * questions.length);
+    const randomQuestion = questions[randomIndex];
+
+    return randomQuestion;
+  }
+
   async update(id: number, updateQuizQuestionDto: UpdateQuizQuestionDto): Promise<QuizQuestion> {
     try {
       await this.quizQuestionsRepository.update(id, updateQuizQuestionDto);

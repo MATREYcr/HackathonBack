@@ -3,13 +3,13 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MentorModule } from './mentor/mentor.module';
-import { HeroModule } from './hero/hero.module';
+import { MentorModule } from './modules/core/mentor/mentor.module';
+import { HeroModule } from './modules/core/hero/hero.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { OpenaiModule } from './openai/openai.module';
-import { CohereAiModule } from './cohere-ai/cohere-ai.module';
-import { QuizQuestionsModule } from './quiz-questions/quiz-questions.module';
+import { OpenaiModule } from './modules/Ai/openai/openai.module';
+import { CohereAiModule } from './modules/Ai/cohere-ai/cohere-ai.module';
+import { QuizQuestionsModule } from './modules/core/quiz-questions/quiz-questions.module';
 import { LogsTransactionModule } from './logs/logs-transaction/logs-transaction.module';
 import { LogsQuizQuestionsModule } from './logs/logs-quiz-questions/logs-quiz-questions.module';
 

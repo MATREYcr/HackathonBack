@@ -1,5 +1,5 @@
 import { IsInt } from 'class-validator';
-import { Mentor } from 'src/mentor/entities/mentor.entity';
+import { Mentor } from 'src/modules/core/mentor/entities/mentor.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
