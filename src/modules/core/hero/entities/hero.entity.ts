@@ -22,7 +22,7 @@ export class Hero {
   @Column({ nullable: true })
   image?: string;
 
-  @Column('int')
+  @Column('int', { nullable: true })
   @IsInt()
   crowns?: number;
 
