@@ -7,6 +7,7 @@ import { Hero } from './entities/hero.entity';
 import { MentorService } from '../mentor/mentor.service';
 import { BuyAwardsDto } from './dto/buyAwards.dto';
 import { LogsQuizQuestionsService } from 'src/logs/logs-quiz-questions/logs-quiz-questions.service';
+import { LogsTransactionService } from 'src/logs/logs-transaction/logs-transaction.service';
 
 @Injectable()
 export class HeroService {
@@ -15,6 +16,7 @@ export class HeroService {
     private heroesRepository: Repository<Hero>,
     private readonly mentorsService: MentorService,
     private readonly logsQuizQuestionsService: LogsQuizQuestionsService,
+    private readonly logsTransactionService: LogsTransactionService,
   ) { }
 
   async createHero(createHeroDto: CreateHeroDto) {
@@ -91,7 +93,7 @@ export class HeroService {
     }
   }
 
-  async buyAwardsByCrowns({ heroid, numCrowns }: BuyAwardsDto) {
+  async buyAwardsByCrowns({ heroid, numCrowns, message }: BuyAwardsDto) {
     try {
       const heroFound = await this.findOneHeroById(heroid);
       if (!heroFound) {
@@ -105,6 +107,12 @@ export class HeroService {
       await this.updateHero(heroid, { crowns: calculateCrowns })
       const newHeroFound = await this.findOneHeroById(heroid);
 
+      //SaveLog
+      await this.logsTransactionService.create({
+        heroId: heroid,
+        crowns: numCrowns,
+        message,
+      })
       return newHeroFound;
     } catch (error) {
       console.error('Error Failed Buy', error);
@@ -132,7 +140,7 @@ export class HeroService {
     }
     const getStadisticsByLogs = await this.logsQuizQuestionsService.getQuestionsStatisticsByHeroId(heroId);
 
-    return { crowns: hero.crowns, ...getStadisticsByLogs};
+    return { crowns: hero.crowns, ...getStadisticsByLogs };
   }
 
 }

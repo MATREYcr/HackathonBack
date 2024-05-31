@@ -1,4 +1,4 @@
-import { IsNumber } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class BuyAwardsDto {
   @IsNumber()
@@ -6,4 +6,7 @@ export class BuyAwardsDto {
 
   @IsNumber()
   numCrowns: number;
+
+  @IsString()
+  message: string;
 }
