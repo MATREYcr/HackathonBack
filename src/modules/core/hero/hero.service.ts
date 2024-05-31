@@ -101,7 +101,7 @@ export class HeroService {
       }
       const actualCrowns = heroFound.crowns;
       if (actualCrowns < numCrowns) {
-        throw new HttpException('Saldo no disponible', HttpStatus.NOT_FOUND);
+        throw new HttpException('Ups!, Coronas insuficientes', HttpStatus.NOT_FOUND);
       }
       const calculateCrowns = actualCrowns - numCrowns;
       await this.updateHero(heroid, { crowns: calculateCrowns })
