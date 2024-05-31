@@ -43,7 +43,7 @@ export class MentorService {
       return mentorFound;
     } catch (error) {
       console.error('Error finding Mentor by ID', error);
-      throw new HttpException('Error finding Mentor by ID', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw error;
     }
   }
 
@@ -59,7 +59,7 @@ export class MentorService {
       return mentorFound;
     } catch (error) {
       console.error('Error finding Mentor by email', error);
-      throw new HttpException('Error finding Mentor by email', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw error;
     }
   }
 
@@ -74,7 +74,7 @@ export class MentorService {
       return await this.mentorsRepository.save(updatedMentor);
     } catch (error) {
       console.error('Error updating Mentor', error);
-      throw new HttpException('Error updating Mentor', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw error;
     }
   }
 
@@ -87,7 +87,7 @@ export class MentorService {
       return result;
     } catch (error) {
       console.error('Error deleting Mentor', error);
-      throw new HttpException('Error deleting Mentor', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw error;
     }
   }
 

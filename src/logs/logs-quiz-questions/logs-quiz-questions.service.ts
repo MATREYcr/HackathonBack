@@ -44,7 +44,7 @@ export class LogsQuizQuestionsService {
       }
       return log;
     } catch (error) {
-      throw new HttpException('Error finding log', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw error;
     }
   }
 

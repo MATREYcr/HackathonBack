@@ -46,7 +46,7 @@ export class LogsTransactionService {
       }
       return logsTransaction;
     } catch (error) {
-      throw new HttpException('Failed to fetch log transaction', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw error;
     }
   }
 

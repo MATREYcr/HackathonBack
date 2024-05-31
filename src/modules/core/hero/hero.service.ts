@@ -33,7 +33,7 @@ export class HeroService {
       return await this.heroesRepository.save(newHero);
     } catch (error) {
       console.error('Error creating Hero', error);
-      throw new HttpException('Error creating Hero', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw error;
     }
   }
 
@@ -58,7 +58,7 @@ export class HeroService {
       return heroFound;
     } catch (error) {
       console.error('Error finding Hero by ID', error);
-      throw new HttpException('Error finding Hero by ID', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw error;
     }
   }
 
@@ -74,7 +74,7 @@ export class HeroService {
       return heroFound;
     } catch (error) {
       console.error('Error finding Hero by email', error);
-      throw new HttpException('Error finding Hero by email', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw error;
     }
   }
 
@@ -106,7 +106,6 @@ export class HeroService {
       const calculateCrowns = actualCrowns - numCrowns;
       await this.updateHero(heroid, { crowns: calculateCrowns })
       const newHeroFound = await this.findOneHeroById(heroid);
-
       //SaveLog
       await this.logsTransactionService.create({
         heroId: heroid,
@@ -134,13 +133,19 @@ export class HeroService {
   }
 
   async getStadisticsByHeroId(heroId: number) {
-    const hero = await this.heroesRepository.findOne({ where: { id: heroId } });
-    if (!hero) {
-      throw new Error('Hero not found');
-    }
-    const getStadisticsByLogs = await this.logsQuizQuestionsService.getQuestionsStatisticsByHeroId(heroId);
+    try {
+      const hero = await this.heroesRepository.findOne({ where: { id: heroId } });
+      if (!hero) {
+        throw new Error('Hero not found');
+      }
+      const getStadisticsByLogs = await this.logsQuizQuestionsService.getQuestionsStatisticsByHeroId(heroId);
 
-    return { crowns: hero.crowns, ...getStadisticsByLogs };
+      return { crowns: hero.crowns, ...getStadisticsByLogs };
+    } catch (error) {
+      console.error('Error deleting Hero', error);
+      throw error;
+    }
+
   }
 
 }
