@@ -1,8 +1,7 @@
-// src/auth/auth.controller.ts
 import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateMentorDto } from '../mentor/dto/create-mentor.dto';
-import { CreateHeroDto } from '../hero/dto/create-hero.dto';
+import { CreateMentorDto } from '../modules/core/mentor/dto/create-mentor.dto';
+import { CreateHeroDto } from '../modules/core/hero/dto/create-hero.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 
 @Controller('auth')

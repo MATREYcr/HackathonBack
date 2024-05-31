@@ -18,10 +18,7 @@ export class QuizQuestionsService {
       const quizQuestion = this.quizQuestionsRepository.create(createQuizQuestionDto);
       return await this.quizQuestionsRepository.save(quizQuestion);
     } catch (error) {
-      throw new HttpException(
-        'Error creating QuizQuestion',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new HttpException('Error creating QuizQuestion', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -29,10 +26,7 @@ export class QuizQuestionsService {
     try {
       return await this.quizQuestionsRepository.find();
     } catch (error) {
-      throw new HttpException(
-        'Error fetching QuizQuestions',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new HttpException('Error fetching QuizQuestions', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -44,11 +38,16 @@ export class QuizQuestionsService {
       }
       return quizQuestion;
     } catch (error) {
-      throw new HttpException(
-        'Error fetching QuizQuestion',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw error;
     }
+  }
+
+  async findOneBySignature(signature: string): Promise<QuizQuestion> {
+    const questions = await this.quizQuestionsRepository.find({ where: { signature } });
+    const randomIndex = Math.floor(Math.random() * questions.length);
+    const randomQuestion = questions[randomIndex];
+
+    return randomQuestion;
   }
 
   async update(id: number, updateQuizQuestionDto: UpdateQuizQuestionDto): Promise<QuizQuestion> {
@@ -70,10 +69,9 @@ export class QuizQuestionsService {
         throw new NotFoundException(`QuizQuestion with ID ${id} not found`);
       }
     } catch (error) {
-      throw new HttpException(
-        'Error deleting QuizQuestion',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw error;
     }
   }
+
+
 }

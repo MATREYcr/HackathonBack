@@ -1,4 +1,4 @@
-import { Hero } from 'src/hero/entities/hero.entity';
+import { Hero } from 'src/modules/core/hero/entities/hero.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()

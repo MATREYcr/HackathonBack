@@ -20,6 +20,7 @@ export class CreateHeroDto {
   @IsString()
   image?: string;
 
+  @IsOptional()
   @IsInt()
   crowns?: number;
 

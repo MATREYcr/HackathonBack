@@ -1,10 +1,9 @@
-// src/auth/auth.service.ts
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { MentorService } from '../mentor/mentor.service';
-import { HeroService } from '../hero/hero.service';
-import { CreateMentorDto } from '../mentor/dto/create-mentor.dto';
-import { CreateHeroDto } from '../hero/dto/create-hero.dto';
+import { MentorService } from '../modules/core/mentor/mentor.service';
+import { HeroService } from '../modules/core/hero/hero.service';
+import { CreateMentorDto } from '../modules/core/mentor/dto/create-mentor.dto';
+import { CreateHeroDto } from '../modules/core/hero/dto/create-hero.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 
 @Injectable()

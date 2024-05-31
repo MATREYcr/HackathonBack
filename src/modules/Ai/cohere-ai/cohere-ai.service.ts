@@ -8,7 +8,7 @@ export class CohereAiService {
 
   constructor() {
     this.cohere = new CohereClient({
-      token: 'GjXHkLysdr6vYuRqXvxhXW3j2vqnLS8SWew0uqjX',
+      token: process.env.TOKEN_COHERE_AI,
     });
   }
 

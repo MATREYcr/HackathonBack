@@ -11,7 +11,7 @@ export class OpenaiService {
 
   async generateResponse(prompt: string): Promise<string> {
     const response = await this.openai.completions.create({
-      model: 'gpt-3.5-turbo', // Puedes cambiar el modelo según tus necesidades
+      model: 'gpt-3.5-turbo',
       prompt: prompt,
       max_tokens: 100,
     });
