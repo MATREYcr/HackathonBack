@@ -12,8 +12,19 @@ export class LogsQuizQuestionsController {
     return this.logsQuizQuestionsService.findByHeroId(heroId);
   }
 
+  @Get('Statistics/:heroId')
+  async getQuestionsStatisticsByHeroId(@Param('heroId', ParseIntPipe) heroId: number) {
+    return this.logsQuizQuestionsService.getQuestionsStatisticsByHeroId(heroId);
+  }
+
+  @Get('correct-answers-by-subject/:heroId')
+  async getCorrectAnswersBySubject(@Param('heroId') heroId: number) {
+    return this.logsQuizQuestionsService.getCorrectAnswersBySubject(heroId);
+  }
+
   @Post()
   async create(@Body() createLogsQuizQuestionsDto: CreateLogsQuizQuestionsDto): Promise<LogsQuizQuestions> {
     return this.logsQuizQuestionsService.create(createLogsQuizQuestionsDto);
   }
+
 }
